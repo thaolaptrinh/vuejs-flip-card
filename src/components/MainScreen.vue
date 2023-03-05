@@ -30,14 +30,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
-.screen {
-  @apply w-full h-screen absolute
-  top-0 left-0 z-10 flex
-  items-center justify-center
-  flex-col bg-dark text-light;
-}
-
+<style lang="scss" scoped>
 h1 {
   @apply text-[2.5rem] sm:text-[4.5rem] uppercase font-semibold;
 }
@@ -47,25 +40,24 @@ p {
 
 .action {
   @apply sm:flex gap-[1.5rem] flex-row;
-}
 
-.action button {
-  @apply mt-[2rem] w-[120px] h-[120px]
-  sm:w-[150px] lg:h-[150px] 
-  bg-transparent cursor-pointer
- border-light border-[1px] 
-  border-solid rounded-[1rem]
-  flex flex-col justify-center items-center
-  transition-colors ease-in-out duration-300
-  hover:bg-light hover:text-dark;
-}
+  & button {
+    @apply mt-[2rem] w-[120px] h-[120px]
+    sm:w-[150px] lg:h-[150px]
+    bg-transparent cursor-pointer
+  border-light border-[1px]
+    border-solid rounded-[1rem]
+    flex flex-col justify-center items-center
+    transition-colors ease-in-out duration-300
+    hover:bg-light hover:text-dark;
 
-button span:first-child {
-  font-size: 2rem;
-}
-
-button span:last-child {
-  margin-top: 0.5rem;
-  font-size: 1.25rem;
+    & span:first-child {
+      font-size: 2rem;
+    }
+    & span:last-child {
+      margin-top: 0.5rem;
+      font-size: 1.25rem;
+    }
+  }
 }
 </style>
