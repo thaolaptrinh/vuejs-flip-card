@@ -42,7 +42,6 @@ export default {
       const secondCards = [...firstCards];
       const cards = [...firstCards, ...secondCards];
       this.settings.cardsContext = shuffled(shuffled(shuffled(cards)));
-      console.log(this.settings.cardsContext);
 
       this.settings.startAt = new Date().getTime();
       this.statusMath = "math";
