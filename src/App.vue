@@ -3,7 +3,10 @@
     v-if="statusMath === 'default'"
     @onStart="onHandleBeforeStart($event)"
   />
-  <interact-screen v-if="statusMath === 'math'" />
+  <interact-screen
+    v-if="statusMath === 'math'"
+    :cardsContext="settings.cardsContext"
+  />
   <result-screen />
   <copy-right-screen />
 </template>
@@ -19,9 +22,10 @@ export default {
   components: { CopyRightScreen, MainScreen, InteractScreen, ResultScreen },
   data() {
     return {
-      setting: {
+      settings: {
         totalOfBlocks: 0,
         cardsContext: [],
+        startAt: "",
       },
       statusMath: "default",
     };
@@ -29,19 +33,32 @@ export default {
 
   methods: {
     onHandleBeforeStart(config) {
-      this.setting.totalOfBlocks = config.totalOfBlocks;
+      this.settings.totalOfBlocks = config.totalOfBlocks;
       const firstCards = Array.from(
-        { length: this.setting.totalOfBlocks / 2 },
+        { length: this.settings.totalOfBlocks / 2 },
         (v, i) => i + 1
       );
 
       const secondCards = [...firstCards];
       const cards = [...firstCards, ...secondCards];
-      this.setting.cardsContext = shuffled(shuffled(shuffled(cards)));
-      console.log(this.setting.cardsContext);
+      this.settings.cardsContext = shuffled(shuffled(shuffled(cards)));
+      console.log(this.settings.cardsContext);
 
-      this.setting.cardsContext = this.statusMath = "math";
+      this.settings.startAt = new Date().getTime();
+      this.statusMath = "math";
     },
   },
 };
 </script>
+
+<style lang="postcss" scoped>
+.copyright {
+  @apply fixed left-[50%]
+  bottom-[1.5rem]  -translate-x-1/2
+  text-light text-center z-10 text-[1.3rem] md:text-[1.5rem];
+}
+
+.copyright a {
+  @apply text-primary underline;
+}
+</style>
