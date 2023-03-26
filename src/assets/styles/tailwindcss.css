@@ -6,11 +6,4 @@
   body {
     @apply font-body w-full text-[16px];
   }
-
-  .screen {
-    @apply w-full h-screen absolute
-    top-0 left-0 z-10 flex
-    items-center justify-center
-    flex-col bg-dark text-light;
-  }
 }
