@@ -1,5 +1,5 @@
 <template>
-  <div class="screen">
+  <div class="screen" :class="statusMath">
     <main-screen
       v-if="statusMath === 'default'"
       @onStart="onHandleBeforeStart($event)"
@@ -12,7 +12,7 @@
     <result-screen
       :timer="timer"
       v-if="statusMath === 'result'"
-      @onStartAgain="status === 'default'"
+      @onStartAgain="statusMath = 'default'"
     />
     <copy-right-screen />
   </div>
@@ -32,9 +32,9 @@ export default {
       settings: {
         totalOfBlocks: 0,
         cardsContext: [],
-        startAt: "",
+        startAt: null,
       },
-      statusMath: "default",
+      statusMath: "result",
       timer: 0,
     };
   },
