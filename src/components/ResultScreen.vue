@@ -25,11 +25,10 @@ export default {
 
 <style lang="scss" scoped>
 .screen h1 {
-  font-size: 5rem;
+  @apply text-[2.5rem] md:text-[3rem] lg:text-[5rem];
 }
 .screen h3 {
-  margin-top: 1.5rem;
-  font-size: 3rem;
+  @apply mt-[1.5rem] text-[2rem] md:text-[2.5rem] lg:text-[3rem];
 }
 .screen button {
   @apply shadow-none border bg-transparent text-[white]
