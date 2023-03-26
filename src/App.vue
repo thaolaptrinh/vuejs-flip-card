@@ -1,14 +1,21 @@
 <template>
-  <main-screen
-    v-if="statusMath === 'default'"
-    @onStart="onHandleBeforeStart($event)"
-  />
-  <interact-screen
-    v-if="statusMath === 'math'"
-    :cardsContext="settings.cardsContext"
-  />
-  <result-screen />
-  <copy-right-screen />
+  <div class="screen">
+    <main-screen
+      v-if="statusMath === 'default'"
+      @onStart="onHandleBeforeStart($event)"
+    />
+    <interact-screen
+      v-if="statusMath === 'math'"
+      :cardsContext="settings.cardsContext"
+      @onFinish="onGetResult"
+    />
+    <result-screen
+      :timer="timer"
+      v-if="statusMath === 'result'"
+      @onStartAgain="status === 'default'"
+    />
+    <copy-right-screen />
+  </div>
 </template>
 <script>
 import CopyRightScreen from "./components/CopyRightScreen.vue";
@@ -28,6 +35,7 @@ export default {
         startAt: "",
       },
       statusMath: "default",
+      timer: 0,
     };
   },
 
@@ -42,15 +50,23 @@ export default {
       const secondCards = [...firstCards];
       const cards = [...firstCards, ...secondCards];
       this.settings.cardsContext = shuffled(shuffled(shuffled(cards)));
-
       this.settings.startAt = new Date().getTime();
       this.statusMath = "math";
+    },
+    onGetResult() {
+      this.timer = new Date().getTime() - this.settings.startAt;
+      this.statusMath = "result";
     },
   },
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
+.screen {
+  @apply w-full min-h-screen z-10 flex
+    items-center justify-center
+    flex-col bg-dark text-light text-center;
+}
 .copyright {
   @apply fixed left-[50%]
   bottom-[1.5rem]  -translate-x-1/2
